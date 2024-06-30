@@ -2,27 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColumnControllerScript : MonoBehaviour {
+public class ColumnControllerScript : MonoBehaviour
+{
+	private const string SelectForFireMethodName = "SelectForFire";
+	const string FireMethodName = "Fire";
 
-	public float min = 0;
-	public float max = 10;
+	[SerializeField] private float minInvokeTime = 0;
+	[SerializeField] private float maxInvokeTime = 10;
 
-	void Start () {
-		float rand = Random.Range (min, max);
-		Invoke ("SelectForFire", rand);
+	private float repeatRate ;
+
+	void Start()
+	{
+		StartCoroutine(WaitAndFire());
+		repeatRate = maxInvokeTime / 4;
 	}
 
-	void Update () {
-		if (transform.childCount == 0)
-			Destroy (gameObject);
+	private IEnumerator WaitAndFire()
+	{
+		yield return new WaitUntil(() => !CounterScript.IsCounterVisible);
+		float rand = Random.Range(minInvokeTime, maxInvokeTime);
+		InvokeRepeating(SelectForFireMethodName, rand,repeatRate);
 	}
 
-	void SelectForFire () {
-		if (!CounterScript.counter && !LifeManager.gameOver && transform.childCount > 0) {
-			transform.GetChild (0).gameObject.GetComponent<EnemyScript> ().Invoke ("Fire", 0f);
-
-			float rand = Random.Range (min, max / 4);
-			Invoke ("SelectForFire", rand);
-		} 
+	void SelectForFire()
+	{
+		if (!LifeManager.gameOver && transform.childCount > 0)
+		{
+			transform.GetChild(0).gameObject.GetComponent<EnemyScript>().Invoke(FireMethodName,0f);
+		}
+		else if (transform.childCount == 0)
+			Destroy(gameObject);
 	}
 }
