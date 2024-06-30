@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MasterControllerScript : MonoBehaviour {
 
-	private Rigidbody2D master;
+	private Rigidbody2D bulletMaster;
 	private bool start = true;
 	private bool visible = false;
 
@@ -14,7 +14,7 @@ public class MasterControllerScript : MonoBehaviour {
 	void Start () {
 		visible = false;
 		transform.gameObject.SetActive (false);
-		master = GetComponent<Rigidbody2D> ();
+		bulletMaster = GetComponent<Rigidbody2D> ();
 		InvokeRepeating ("move", 0f, 8f);
 		Invoke ("ChooseWhenFire", 1f);
 	}
@@ -31,7 +31,7 @@ public class MasterControllerScript : MonoBehaviour {
 			visible = true;
 			transform.gameObject.SetActive (true);
 			transform.position = new Vector2 (-10.5f, 4.0f);
-			master.velocity = new Vector2 (moveSpeed, 0);
+			bulletMaster.velocity = new Vector2 (moveSpeed, 0);
 		}
 	}
 

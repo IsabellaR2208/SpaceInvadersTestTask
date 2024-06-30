@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
 
-	public Rigidbody2D bullet;
+	[SerializeField] private Rigidbody2D bullet;
 
 	void Fire () {
 		float x = transform.position.x;

@@ -16,6 +16,7 @@ public class CounterScript : MonoBehaviour
 	}
 	IEnumerator DecrementCounter()
 	{
+		//Count Down to start the game
 		while (count > 0)
 		{
 			yield return new WaitForSeconds(INTERVAL);

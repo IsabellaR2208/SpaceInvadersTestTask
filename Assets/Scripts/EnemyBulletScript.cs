@@ -8,9 +8,11 @@ public class EnemyBulletScript : MonoBehaviour {
 
 	void Start () {
 		bullet = GetComponent<Rigidbody2D> ();
+		//Start moving the bullet
 		bullet.velocity = new Vector2 (0, -speed);
 	}
 	void OnBecameInvisible () {
+		//Destroy if not visible
 		Destroy (gameObject);
 	}
 }
