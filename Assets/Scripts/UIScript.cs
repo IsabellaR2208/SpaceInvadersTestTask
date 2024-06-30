@@ -12,20 +12,21 @@ public class UIScript : MonoBehaviour {
 	{
 		startLabel = GetComponent<Text>();
 
-#if UNITY_IOS || UNITY_ANDROID
+#if UNITY_EDITOR || UNITY_STANDALONE
 		startLabel.text = "Tap to Continue";
-#else
+#elif UNITY_IOS || UNITY_ANDROID
 		startLabel.text = "Press Start to Continue";
 #endif
 	}
 
 	void Update () {
-#if UNITY_IOS || UNITY_ANDROID
-			if (Input.touchCount > 0)
+#if	UNITY_EDITOR || UNITY_STANDALONE
+		if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.Space) ||	Input.GetMouseButton(0) )
 				SceneManager.LoadScene ("main");
-#else
-		if (Input.GetKeyDown (KeyCode.Return) || Input.GetKeyDown (KeyCode.Space))
-				SceneManager.LoadScene ("main");
+#elif UNITY_IOS || UNITY_ANDROID	
+		if (Input.touchCount > 0)
+			SceneManager.LoadScene ("main");
+	
 #endif
 	}
 }
