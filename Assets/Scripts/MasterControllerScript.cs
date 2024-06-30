@@ -27,7 +27,7 @@ public class MasterControllerScript : MonoBehaviour {
 	}
 
 	void move () {
-		if (!EnemyCounter.gameWin && !LifeManager.gameOver && !CounterScript.counter) {
+		if (!EnemyCounter.gameWin && !LifeManager.gameOver && !CounterScript.IsCounterVisible) {
 			visible = true;
 			transform.gameObject.SetActive (true);
 			transform.position = new Vector2 (-10.5f, 4.0f);

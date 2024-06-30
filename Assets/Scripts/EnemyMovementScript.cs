@@ -25,7 +25,7 @@ public class EnemyMovementScript : MonoBehaviour {
 	void Update () {
 		moveSpeed = Mathf.Pow ((Mathf.Sqrt (56 - EnemyCounter.count) / (Mathf.Sqrt (Mathf.Pow (56, 2) - Mathf.Pow (EnemyCounter.count, 2)))) * 10, 3) - 0.25f;
 
-		if (!CounterScript.counter) {
+		if (!CounterScript.IsCounterVisible) {
 			if (start) {
 				moveRight ();
 				start = false;

@@ -2,37 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class CounterScript : MonoBehaviour {
-
-	private Text counterLabel;
-
-	public static bool counter = true;
-	public static float count = 3f;
-
+public class CounterScript : MonoBehaviour
+{
+	private const int INTERVAL = 1;
+	private Text m_counterLabel;
+	public static int count = 3;
+	public static bool IsCounterVisible = true;
+	
 	void Start () {
-		counterLabel = GetComponent<Text> ();
+		m_counterLabel = GetComponent<Text> ();
+		UpdateCounter();
+		StartCoroutine(DecrementCounter());
 	}
-
-	void Update () {
-		if (count > 4f)
-			UpdateCounter ("5");
-		else if (count > 3f) 
-			UpdateCounter ("4");
-		else if (count > 2f)
-			UpdateCounter ("3");
-		else if (count > 1f) 
-			UpdateCounter ("2");
-		else if (count > 0f) 
-			UpdateCounter ("1");
-		else {
-			counterLabel.text = "";
-			counter = false;
+	IEnumerator DecrementCounter()
+	{
+		while (count > 0)
+		{
+			yield return new WaitForSeconds(INTERVAL);
+			count--;
+			UpdateCounter();
 		}
+
+		IsCounterVisible = false;
+		m_counterLabel.gameObject.SetActive(false);
 	}
 
-	void UpdateCounter ( string number ) {
-		count = count - (1f * Time.deltaTime);
-		counterLabel.text = number;
+	void UpdateCounter ( ) {
+		m_counterLabel.text = count.ToString();
 	}
 }

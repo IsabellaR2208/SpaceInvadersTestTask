@@ -16,7 +16,7 @@ public class PlayerActionScript : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!CounterScript.counter && !EnemyCounter.gameWin) {
+		if (!CounterScript.IsCounterVisible && !EnemyCounter.gameWin) {
 			if (Application.platform == RuntimePlatform.Android) {
 				transform.Translate (new Vector3 (Input.acceleration.x, 0f, 0f));
 

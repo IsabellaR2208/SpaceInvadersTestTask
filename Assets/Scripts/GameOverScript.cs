@@ -39,7 +39,7 @@ public class GameOverScript : MonoBehaviour {
 		ScoreManager.points = 0;
 		EnemyCounter.count = 55;
 		CounterScript.count = 3;
-		CounterScript.counter = true;
+		CounterScript.IsCounterVisible = true;
 		EnemyCounter.gameWin = false;
 		LifeManager.gameOver = false;
 		SceneManager.LoadScene ("main");

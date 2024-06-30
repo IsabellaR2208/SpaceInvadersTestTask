@@ -20,7 +20,7 @@ public class PlayerBulletScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D col) {
-		if (!CounterScript.counter && !LifeManager.gameOver || !EnemyCounter.gameWin) {
+		if (!CounterScript.IsCounterVisible && !LifeManager.gameOver || !EnemyCounter.gameWin) {
 			if (col.gameObject.tag == "Enemy1")
 				Annihilate (col, 10, true);
 			else if (col.gameObject.tag == "Enemy2" || col.gameObject.tag == "Enemy3") 
